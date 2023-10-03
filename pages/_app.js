@@ -4,22 +4,17 @@ import "../global.css"
 import "../custom-ch.css"
 
 function MyApp({ Component, pageProps }) {
+  console.log(pageProps);
+  console.log(Component);
   return (
     <div>
       <Head>
-        <title>Not Stripe Docs | Code Hike Demo</title>
+        <title>Zuora SDK Tutorials</title>
       </Head>
       <nav>
-        <div>Not Stripe Docs</div>
+        {/* Todo: Add Zuora logo here */}
+        <div>Zuora</div>
       </nav>
-      <div className="warning">
-        <strong>
-          This is a clone of{" "}
-          <a href="https://stripe.com/docs/checkout/quickstart">Stripe Docs</a>.
-        </strong>{" "}
-        <br />
-        Made using <a href="https://codehike.org">Code Hike</a>. Code <a href="https://github.com/code-hike/not-stripe">available on GitHub</a>.
-      </div>
       <article>
         <div>
           <Component {...pageProps} />
