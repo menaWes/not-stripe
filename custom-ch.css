@@ -3,6 +3,20 @@ body {
   --ch-scrollycoding-code-min-height: 62vh;
 }
 
+.ch-editor-tab-inactive{
+  border-right-color: #33495b !important;
+  border-bottom-color: #33495b !important;
+}
+
+.ch-editor-tab-active{
+  border-right-color:#223341 !important;
+  border-bottom-color: #223341 !important;
+}
+
+.ch-editor-tab>div{
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
 .ch-scrollycoding {
   gap: 0;
 }
@@ -29,7 +43,7 @@ body {
 }
 
 .ch-code-multiline-mark {
-  background: #1a2652 !important;
+  background: #33495b!important;
 }
 
 .ch-code-multiline-mark-border {

@@ -1,19 +1,19 @@
 module.exports = {
-  name: "Stripe Docs Blue",
+  name: "Zuora docs",
   type: "dark",
   colors: {
-    "editor.background": "#212d63",
+    "editor.background": "#223341",
     "editor.foreground": "#fafafa",
-    "activityBar.background": "#212d63",
-    "sideBar.background": "#1A2652",
-    "editorGroupHeader.tabsBackground": "#212d63",
-    "sideBarSectionHeader.background": "#212d63",
-    "tab.activeBackground": "#212d63",
-    "tab.inactiveBackground": "#1A2652",
-    "tab.border": "#1A2652",
+    "activityBar.background": "#223341",
+    "sideBar.background": "#33495b",
+    "editorGroupHeader.tabsBackground": "#223341",
+    "sideBarSectionHeader.background": "#223341",
+    "tab.activeBackground": "#223341",
+    "tab.inactiveBackground": "#33495b",
+    "tab.border": "#33495b",
     "input.background": "#ffffff1a",
-    "panel.background": "#1A2652",
-    "panel.border": "#1A2652",
+    "panel.background": "#33495b",
+    "panel.border": "#33495b",
     "editorWidget.background": "#0d0f2b",
     "editorWidget.foreground": "#ffffff4d",
     "editorWidget.border": "#0d0f2b",
@@ -24,7 +24,7 @@ module.exports = {
     "editor.selectionHighlightBackground": "#ffffff1a",
     "activityBarBadge.background": "#007acc",
     "sideBarTitle.foreground": "#bbbbbb",
-    "statusBar.background": "#212d63"
+    "statusBar.background": "#223341"
   },
   tokenColors: [
     {
@@ -66,7 +66,7 @@ module.exports = {
       name: "Keyword, Storage",
       scope: ["keyword", "storage.type", "storage.modifier"],
       settings: {
-        foreground: "#a4cdfe",
+        foreground: "#62bff9",
         fontStyle: "bold"
       }
     },
@@ -84,7 +84,7 @@ module.exports = {
       name: "Tag",
       scope: ["entity.name.tag", "meta.tag.sgml", "markup.deleted.git_gutter"],
       settings: {
-        foreground: "#a4cdfe",
+        foreground: "#62bff9",
         fontStyle: "bold"
       }
     },
@@ -99,7 +99,7 @@ module.exports = {
         "keyword.other"
       ],
       settings: {
-        foreground: "#fbb5b2"
+        foreground: "#d1949e"
       }
     },
     {
@@ -127,7 +127,7 @@ module.exports = {
         "meta.group.braces.curly constant.other.object.key.js string.unquoted.label.js"
       ],
       settings: {
-        foreground: "#85d99e"
+        foreground: "#a0fbaa"
       }
     },
     {
@@ -164,7 +164,7 @@ module.exports = {
       name: "Attributes",
       scope: ["entity.other.attribute-name"],
       settings: {
-        foreground: "#a4cdfe",
+        foreground: "#62bff9",
         fontStyle: "italic"
       }
     },
