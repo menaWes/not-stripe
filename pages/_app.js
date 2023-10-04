@@ -2,7 +2,8 @@ import "@code-hike/mdx/dist/index.css"
 import Head from "next/head"
 import "../global.css"
 import "../custom-ch.css"
-
+import logo from "../logo.svg";
+import Image from 'next/image';
 function MyApp({ Component, pageProps }) {
   console.log(pageProps);
   console.log(Component);
@@ -13,7 +14,8 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <nav>
         {/* Todo: Add Zuora logo here */}
-        <div>Zuora</div>
+
+        <Image src={logo} className="App-logo" alt="logo" height={75} />
       </nav>
       <article>
         <div>

@@ -1,0 +1,234 @@
+import Head from "next/head"
+
+<Head>
+  <title> Get started with Java SDK </title>
+</Head>
+
+<CH.Scrollycoding>
+
+# Quickstart for Zuora Java SDK
+
+
+<CH.Code>
+
+```java createProduct.java
+import com.zuora.sdk.ZuoraClient;
+import org.openapitools.client.ApiException;
+import org.openapitools.client.model.Plan;
+import org.openapitools.client.model.PlanCreateRequest;
+import org.openapitools.client.model.Product;
+import org.openapitools.client.model.ProductCreateRequest;
+import org.openapitools.client.model.PriceCreateRequest;
+import org.openapitools.client.model.Price;
+import org.openapitools.client.model.Recurring;
+import org.threeten.bp.LocalDate;
+
+import java.math.BigDecimal;
+import java.util.*;
+
+public class CreateProduct {
+
+  public static void main(String[] args) {
+
+    ZuoraClient zuoraClient = new ZuoraClient(
+        "{clientId}",
+        "{secret}",
+        ZuoraClient.zuoraBaseUrls.get("SBX")
+    );
+    zuoraClient.initialize();
+
+    try {
+        //Create a product
+        LocalDate productStartDate = LocalDate.of(2022, 4, 1);
+        LocalDate productEndDate = LocalDate.of(2032, 4, 1);
+
+        ProductCreateRequest productRequest = new ProductCreateRequest()
+            .name("Gold Membership")
+            .startDate(productStartDate)
+            .endDate(productEndDate)
+            .description("Gold Product")
+            .sku("SKU3677");
+
+        Product newProduct = zuoraClient.products().createProduct(productRequest);
+
+        //Create a plan
+        LocalDate planStartDate = LocalDate.of(2022, 6, 20);
+        LocalDate planEndDate = LocalDate.of(2030, 6, 19);
+        List<String> activeCurrencies = new ArrayList<String>();
+        activeCurrencies.add("USD");
+
+        PlanCreateRequest planRequest = new PlanCreateRequest()
+            .name("Monthly Plan")
+            .productId(newProduct.getId())
+            .startDate(planStartDate)
+            .endDate(planEndDate)
+            .description("Monthly plan of the Gold product")
+            .activeCurrencies(activeCurrencies);
+
+        Plan newPlan = zuoraClient.plans().createPlan(planRequest);
+
+        //Create a recurring per-unit price
+        Map<String, BigDecimal> unitAmounts = new HashMap<String, BigDecimal>();
+        unitAmounts.put("USD", new BigDecimal(100.0));
+
+        PriceCreateRequest priceRequest = new PriceCreateRequest()
+            .unitAmounts(unitAmounts)
+            .unitOfMeasure("License")
+            .name("Recurring Per Unit Price")
+            .priceBaseInterval(PriceCreateRequest.PriceBaseIntervalEnum.MONTH)
+            .planId(newPlan.getId())
+            .description("Recurring per unit price of the monthly plan")
+            .recurring(new Recurring()
+                .intervalCount(1)
+                .timing(Recurring.TimingEnum.ADVANCE)
+                .interval(Recurring.IntervalEnum.MONTH))
+            .quantity(new BigDecimal(1))
+            .startEvent(PriceCreateRequest.StartEventEnum.CONTRACT_EFFECTIVE);
+
+        Price newPrice = zuoraClient.prices().createPrice(priceRequest);
+
+        //Verify the created product by using the `retrieve a product` operation,
+        //and passing in `plans.prices` as the `expand` parameter.
+        Product productResponse = zuoraClient.products().getProduct(newProduct.getId(), Collections.singletonList("plans.prices"));
+
+        System.out.println(productResponse);     
+        
+    } catch (ApiException e){
+        System.out.println(e.getZuoraError().toString());
+    }
+  }
+}
+```
+
+
+```xml pom.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>zuora-java-project</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+<dependencies>
+    <dependency>
+        <groupId>com.zuora.sdk</groupId>
+        <artifactId>zuora-sdk-java</artifactId>
+        <version>2.0.13</version>
+    </dependency>
+</dependencies>
+</project>
+
+```
+</CH.Code>
+
+Complete the steps described in this article to get up and running with the [Zuora Quickstart API](https://www.zuora.com/developer/api-references/quickstart-api/overview/) using the official Zuora Java SDK.
+
+## Prerequisites 
+
+- You must have a working Zuora tenant such as Zuora Sandbox where you can test the Java SDK. If you do not yet have a Zuora tenant, go to [Zuora Test Drive](https://www.zuora.com/zuora-test-drive/) and sign up for a test environment.
+- The following features are required to be enabled on your tenant:
+    - **Orders** . If this feature is enabled in your tenant, you can see **Orders** under **Customers** in the left navigation panel in the Zuora UI. To obtain access to this feature, submit a request at [Zuora Global Support](https://support.zuora.com/hc/en-us) .
+    - **Invoice Settlement** . If this feature is enabled in your tenant, you can see **Credit** and **Debit Memos** under **Billing** in the left navigation panel in the Zuora UI. To obtain access to this feature, submit a request at [Zuora Global Support](https://support.zuora.com/hc/en-us) .
+
+
+---
+# Get started with the Java SDK
+
+### Add the Zuora Java client library to your project
+
+```xml pom.xml focus=16:20 mark=16:20
+
+```
+
+The server-side Zuora client libraries allow you to interact with Zuora APIs from your code. The libraries provide helpful methods for interacting with Zuora resources, such as your customer accounts, products, and subscriptions.
+
+To use Zuora Java SDK, you must use Maven for the build. To learn how to install Maven, see [Installing Apache Maven](https://maven.apache.org/install.html).
+
+Add the `zuora-sdk-java` dependency to the dependencies in the `pom.xml` file of your project.
+
+Make sure to replace `${version}` with the latest Zuora API library version.
+
+Check [Zuora Java SDK on Maven Central](https://mvnrepository.com/artifact/com.zuora.sdk/zuora-sdk-java) for more information.
+
+
+---
+
+### Create and initialize a Zuora client instance
+
+```java createProduct.java focus=19:24 mark=19:24
+
+```
+Configure a Zuora client instance with your `Client ID`, `Client Secret`, and the environment of your Zuora tenant, then initialize this client.
+
+---
+
+## Create a product with a plan and a price
+
+After you have created and initialized your Zuora client instance, you can start sending your first request.
+
+**Basic concepts**
+
+Before you proceed with this step, you should understand the differences among Products, Plans, and Prices.
+
+- Products describe the goods or services you offer to your customers. Each product has a unique ID and SKU.
+- Plans are collections of prices. While products help you track inventory or provisioning, plans and prices help you track payment terms.
+- Prices determine how you charge your customers for the product they subscribe to.
+
+```java createProduct.java focus=28:74 mark=28:74
+
+```
+
+---
+
+### Create a product
+
+```java createProduct.java focus=28:38 mark=28:38
+
+```
+
+---
+
+### Create a plan
+
+```java createProduct.java focus=41:54 mark=41:54
+
+```
+
+---
+
+### Create a price
+
+```java createProduct.java focus=57:74 mark=57:74
+
+```
+
+---
+
+### Verify the result
+
+```java createProduct.java focus=78:80 mark=78:80
+
+```
+
+After the product, plan, and price are created, you can see the result in the Zuora UI or through the GET API operations for these objects.
+
+For example, you can find the created product by navigating to **Products > Product Catalog** in the Zuora UI. Alternatively, use the [Retrieve a product](https://www.zuora.com/developer/api-references/quickstart-api/operation/getProduct/) or [List all products](https://www.zuora.com/developer/api-references/quickstart-api/operation/getProducts/) operation and pass in `plans.prices` as the `expand[]` parameter to verify the results. 
+
+---
+
+## What to do next
+
+You can then proceed to create a subscription and an account. See [Sign up new subscribers](https://www.zuora.com/developer/quickstart-api/tutorial/sign-up-subscribers/) for instructions.
+
+For other use case documentation and Java code samples, refer to the [Quickstart API tutorials](https://www.zuora.com/developer/quickstart-api/tutorial/overview/).
+
+</CH.Scrollycoding>
+
+<div style={{ height: 99 }} />

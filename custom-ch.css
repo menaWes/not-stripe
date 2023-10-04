@@ -3,6 +3,10 @@ body {
   --ch-scrollycoding-code-min-height: 62vh;
 }
 
+.ch-scrollycoding-step-content{
+  min-height: 75px;
+}
+
 .ch-editor-tab-inactive{
   border-right-color: #33495b !important;
   border-bottom-color: #33495b !important;
