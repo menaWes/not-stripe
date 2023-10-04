@@ -15,7 +15,10 @@ function MyApp({ Component, pageProps }) {
       <nav>
         {/* Todo: Add Zuora logo here */}
 
-        <Image src={logo} className="App-logo" alt="logo" height={75} />
+        <a href="http://localhost:3000/">
+          <Image src={logo} className="App-logo" alt="logo" height={75} />
+        </a>
+     
       </nav>
       <article>
         <div>
