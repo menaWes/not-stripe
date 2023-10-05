@@ -1,5 +1,6 @@
 import "@code-hike/mdx/dist/index.css"
 import Head from "next/head"
+import Link from "next/link";
 import "../global.css"
 import "../custom-ch.css"
 import logo from "../logo.svg";
@@ -15,9 +16,9 @@ function MyApp({ Component, pageProps }) {
       <nav>
         {/* Todo: Add Zuora logo here */}
 
-        <a href="http://localhost:3000/">
+        <Link href="/">
           <Image src={logo} className="App-logo" alt="logo" height={75} />
-        </a>
+        </Link>
      
       </nav>
       <article>
